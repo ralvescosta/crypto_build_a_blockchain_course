@@ -23,7 +23,7 @@ class Block {
     return new this(Date.now(), '', this.hash(timestamp, '', data), data)
   }
 
-  static mineBlock (lastBlock: Block, data: string[]) {
+  static mineBlock (lastBlock: Block, data: string[]): Block {
     const timestamp = Date.now()
     const lastHash = lastBlock.hash
     const hash = this.hash(timestamp, lastHash, data)

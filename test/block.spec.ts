@@ -1,8 +1,13 @@
 import { Block } from '../src/block'
 
 describe('Block', () => {
+  let genesisBlock: Block, secondBlock: Block
+
   beforeEach(() => {
     jest.clearAllMocks()
+
+    genesisBlock = Block.genesis()
+    secondBlock = Block.mineBlock(genesisBlock, ['some data'])
   })
   it('should create a genesis block correctly', () => {
     const block = Block.genesis()
@@ -10,5 +15,9 @@ describe('Block', () => {
     expect(block.data).toBeInstanceOf(Array)
     expect(block.lastHash).not.toBeUndefined()
     expect(block.hash).not.toBeUndefined()
+  })
+
+  it('should second block contains lastHash for thw last block ', () => {
+    expect(secondBlock.lastHash).toEqual(genesisBlock.hash)
   })
 })

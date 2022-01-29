@@ -21,6 +21,5 @@ module.exports = {
     '@babel/proposal-object-rest-spread'
   ],
   ignore: [
-    'test/'
   ]
 }

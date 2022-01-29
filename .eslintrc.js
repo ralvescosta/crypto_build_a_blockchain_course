@@ -1,7 +1,8 @@
 module.exports = {
   env: {
     es2021: true,
-    node: true
+    node: true,
+    jest: true
   },
   extends: [
     'standard'
@@ -15,6 +16,8 @@ module.exports = {
     '@typescript-eslint'
   ],
   rules: {
-    'no-useless-constructor': 'off'
+    'no-prototype-builtins': 'off',
+    'no-useless-constructor': 'off',
+    indent: 'off'
   }
 }

@@ -1,4 +1,4 @@
-import { Block } from './block'
+import { Block } from '@/block'
 
 (function main () {
   const block = Block.genesis()

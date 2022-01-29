@@ -1,3 +1,6 @@
+import { Block } from './block'
+
 (function main () {
-  console.log('oi')
+  const block = new Block(Date.now(), 'aasdf', 'asdf', ['asdf'])
+  console.log(block.toString())
 })()

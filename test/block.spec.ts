@@ -1,4 +1,4 @@
-import { Block } from '../src/block'
+import { Block } from '../src/domain/block'
 
 describe('Block', () => {
   let genesisBlock: Block, secondBlock: Block

@@ -1,22 +1,38 @@
+import SHA256 from 'crypto-js/sha256'
 class Block {
   constructor (
-    private readonly _timestamp: number,
-    private readonly _lastHash: string,
-    private readonly _hash: string,
-    private readonly _data: string[]
+    public readonly timestamp: number,
+    public readonly lastHash: string,
+    public readonly hash: string,
+    public readonly data: string[]
   ) {}
 
   public toString () {
-    return `[Block] 
-      Timestamp: ${this._timestamp}
-      Last Hash: ${this._lastHash.slice(0, 10)}
-      Hash: ${this._hash.slice(0, 10)}
-      Data: ${this._data}
+    return `[Block]
+      Timestamp: ${this.timestamp}
+      Last Hash: ${this.lastHash}
+      Hash: ${this.hash}
+      Data: ${this.data}
   `
   }
 
   static genesis (): Block {
-    return new this(Date.now(), '---', 'has3', [])
+    const timestamp = Date.now()
+    const data = ['Genesis']
+
+    return new this(Date.now(), '', this.hash(timestamp, '', data), data)
+  }
+
+  static mineBlock (lastBlock: Block, data: string[]) {
+    const timestamp = Date.now()
+    const lastHash = lastBlock.hash
+    const hash = this.hash(timestamp, lastHash, data)
+
+    return new this(timestamp, lastHash, hash, data)
+  }
+
+  static hash (timestamp: number, lastHash: string, data: string[]): string {
+    return SHA256(`${timestamp}${lastHash}${data.join()}`).toString()
   }
 }
 

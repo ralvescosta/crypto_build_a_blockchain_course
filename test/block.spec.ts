@@ -20,4 +20,8 @@ describe('Block', () => {
   it('should second block contains lastHash for thw last block ', () => {
     expect(secondBlock.lastHash).toEqual(genesisBlock.hash)
   })
+
+  it('should hash correctly using blockHash()', () => {
+    expect(secondBlock.hash).toEqual(Block.blockHash(secondBlock))
+  })
 })

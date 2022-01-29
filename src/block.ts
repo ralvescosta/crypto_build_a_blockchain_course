@@ -1,10 +1,10 @@
 import SHA256 from 'crypto-js/sha256'
 class Block {
   constructor (
-    public readonly timestamp: number,
-    public readonly lastHash: string,
-    public readonly hash: string,
-    public readonly data: string[]
+    public timestamp: number,
+    public lastHash: string,
+    public hash: string,
+    public data: string[]
   ) {}
 
   public toString () {
@@ -33,6 +33,12 @@ class Block {
 
   static hash (timestamp: number, lastHash: string, data: string[]): string {
     return SHA256(`${timestamp}${lastHash}${data.join()}`).toString()
+  }
+
+  static blockHash (block: Block): string {
+    const { timestamp, lastHash, data } = block
+
+    return this.hash(timestamp, lastHash, data)
   }
 }
 

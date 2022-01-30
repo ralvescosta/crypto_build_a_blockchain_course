@@ -2,7 +2,9 @@ import { Block } from './block'
 
 class Blockchain {
   public chain: Block[]
-  constructor () {
+  constructor (
+    private readonly _logger: any
+  ) {
     this.chain = [Block.genesis()]
   }
 
@@ -44,16 +46,16 @@ class Blockchain {
 
   public replaceChain (newChain: Block[]): void {
     if (newChain.length <= this.chain.length) {
-      console.log('Received chain is not longer than the current chain length')
+      this._logger.info('Received chain is not longer than the current chain length')
       return
     }
 
     if (!this.isValidChain(newChain)) {
-      console.log('The received chain is not valid.')
+      this._logger.info('The received chain is not valid.')
       return
     }
 
-    console.log('Replacing blockchain with the new chain.')
+    this._logger.info('Replacing blockchain with the new chain.')
     this.chain = newChain
   }
 }

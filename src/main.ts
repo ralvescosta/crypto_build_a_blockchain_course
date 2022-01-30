@@ -1,6 +1,14 @@
-import { Block } from '@/block'
+import { Environment } from './infra/environments/environments'
+import { registerInjections } from './ioc'
+import { routerConfig } from './shared/router_config'
 
-(function main () {
-  const block = Block.genesis()
-  console.log(block.toString())
+;(() => {
+  Environment.registerEnvironments()
+  const container = registerInjections()
+
+  const { httpServer } = container.cradle
+
+  httpServer.setup()
+  routerConfig(container.cradle)
+  httpServer.run()
 })()

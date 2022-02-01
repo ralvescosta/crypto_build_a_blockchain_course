@@ -5,11 +5,9 @@ import { IRouter } from '../../shared/i_roter'
 class Routes implements IRouter {
   constructor (private readonly httpServer: any) {}
   register (): void {
-    this.httpServer.registerRoute('post', '/v1/api/books', () => {})
-    this.httpServer.registerRoute('get', '/v1/api/books', () => {})
-    this.httpServer.registerRoute('get', '/v1/api/book/:id', () => {})
-    this.httpServer.registerRoute('put', '/v1/api/book/:id', () => {})
-    this.httpServer.registerRoute('delete', '/v1/api/book/:id', () => {})
+    this.httpServer.registerRoute('post', '/v1/api/blockchain', () => {})
+    this.httpServer.registerRoute('post', '/v1/api/add-block', () => {})
+    this.httpServer.registerRoute('post', '/v1/api/replace-chain', () => {})
   }
 }
 

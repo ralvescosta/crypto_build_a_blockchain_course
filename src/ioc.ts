@@ -1,6 +1,7 @@
 import { createContainer, InjectionMode, asValue, AwilixContainer, asClass } from 'awilix'
 import pino from 'pino'
-import pretty from 'pino-pretty'
+// @ts-ignore
+import pinoInspector from 'pino-inspector'
 
 import { HttpResponseFactory } from './shared/http_response_factory'
 import { HttpServer } from './infra/http_server/http_server'
@@ -27,13 +28,12 @@ const createLoggerInstance = (): pino.Logger => {
   const debug = process.env.DEBUG === 'true'
 
   if (debug) {
-    const stream = pretty({
-      colorize: true
-    })
     logger = pino({
       enabled: process.env.ENABLE_LOG === 'true',
-      level: process.env.LOG_LEVEL || 'warn'
-    }, stream)
+      level: process.env.LOG_LEVEL || 'warn',
+      prettyPrint: true,
+      prettifier: pinoInspector
+    })
   } else {
     logger = pino({
       enabled: process.env.ENABLE_LOG === 'true',

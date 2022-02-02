@@ -1,6 +1,6 @@
 import { Environment } from './infra/environments/environments'
 import { registerInjections } from './ioc'
-import { routerConfig } from './shared/router_config'
+import { routerConfig } from './interface/http/router_config'
 
 ;(() => {
   Environment.registerEnvironments()

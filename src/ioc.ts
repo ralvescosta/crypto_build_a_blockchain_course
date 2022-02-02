@@ -3,10 +3,16 @@ import pino from 'pino'
 // @ts-ignore
 import pinoInspector from 'pino-inspector'
 
-import { HttpResponseFactory } from './shared/http_response_factory'
 import { HttpServer } from './infra/http_server/http_server'
+import { InMemoryDatabaseConn } from './infra/database/in_memory/conn'
+import { InMemoryBlockchainRepository } from './infra/repositories/in_memory_blockchain_repository'
 
-import { Routes } from './interface/presenters/routes'
+import { HttpResponseFactory } from './interface/http/factories/http_response_factory'
+import { HttpErrorHandlerFactory } from './interface/http/factories/http_error_handler_factory'
+import { Routes } from './interface/http/presenters/routes'
+
+import { GetBlocksUseCase } from './application/usecases/get_blocks_usecase'
+import { BlockchainController } from './interface/http/controllers/blockchain_controller'
 
 export const container = createContainer({
   injectionMode: InjectionMode.CLASSIC
@@ -16,7 +22,13 @@ export const registerInjections = (): AwilixContainer => {
     logger: asValue(createLoggerInstance()),
     httpServer: asClass(HttpServer).singleton(),
     httpResponseFactory: asClass(HttpResponseFactory).singleton(),
+    httpErrorHandlerFactory: asClass(HttpErrorHandlerFactory).singleton(),
 
+    dbConn: asClass(InMemoryDatabaseConn).singleton(),
+    blockchainRepository: asClass(InMemoryBlockchainRepository).scoped(),
+
+    getBlocksUseCase: asClass(GetBlocksUseCase),
+    blockchainController: asClass(BlockchainController).singleton(),
     Routes: asClass(Routes).singleton()
   })
 

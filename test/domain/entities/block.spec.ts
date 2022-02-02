@@ -1,6 +1,6 @@
 import { Block } from '../../../src/domain/entities/block'
 
-describe('Block', () => {
+describe('Domain :: Entities :: Block', () => {
   let genesisBlock: Block, secondBlock: Block
 
   beforeEach(() => {

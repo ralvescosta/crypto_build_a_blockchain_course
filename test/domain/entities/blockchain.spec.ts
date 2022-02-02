@@ -1,7 +1,7 @@
 import { Blockchain } from '../../../src/domain/entities/blockchain'
 import { Block } from '../../../src/domain/entities/block'
 
-describe('Blockchain', () => {
+describe('Domain :: Entities :: Blockchain', () => {
   let blockchain: Blockchain, secondBlockchain: Blockchain
   const loggerSpy = {
     info: jest.fn()

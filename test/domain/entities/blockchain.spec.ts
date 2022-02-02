@@ -1,13 +1,16 @@
-import { Blockchain } from '../src/domain/blockchain'
-import { Block } from '../src/domain/block'
+import { Blockchain } from '../../../src/domain/entities/blockchain'
+import { Block } from '../../../src/domain/entities/block'
 
 describe('Blockchain', () => {
   let blockchain: Blockchain, secondBlockchain: Blockchain
+  const loggerSpy = {
+    info: jest.fn()
+  }
 
   beforeEach(() => {
     jest.clearAllMocks()
-    blockchain = new Blockchain()
-    secondBlockchain = new Blockchain()
+    blockchain = new Blockchain(loggerSpy)
+    secondBlockchain = new Blockchain(loggerSpy)
   })
 
   it('should start with genesis block', () => {

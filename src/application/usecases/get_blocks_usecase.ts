@@ -1,6 +1,6 @@
 import { BaseError } from '../../shared/base_error'
 import { Either, right } from '../../shared/either'
-import { Block } from '../../domain/block'
+import { Block } from '../../domain/entities/block'
 import { IBlockchainRepository } from '../interfaces/i_blockchain_repository'
 
 class GetBlocksUseCase {

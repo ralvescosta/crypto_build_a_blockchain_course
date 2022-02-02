@@ -1,4 +1,4 @@
-import { Blockchain } from '../../../domain/blockchain'
+import { Blockchain } from '../../../domain/entities/blockchain'
 import { ILogger } from '../../../application/interfaces/i_logger'
 import { BaseError } from '../../../shared/base_error'
 import { Either, right } from '../../../shared/either'

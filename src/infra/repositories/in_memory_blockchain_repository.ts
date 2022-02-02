@@ -1,6 +1,6 @@
 import { BaseError } from '../../shared/base_error'
 import { Either, right } from '../../shared/either'
-import { Block } from '../../domain/block'
+import { Block } from '../../domain/entities/block'
 import { IInMemoryDatabaseConn } from '../database/in_memory/i_in_memory_conn'
 import { IBlockchainRepository } from '../../application/interfaces/i_blockchain_repository'
 

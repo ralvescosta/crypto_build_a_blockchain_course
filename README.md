@@ -1,5 +1,7 @@
 # Blockchain
 
+This project was build during the course [Build a Blockchain and Cryptocurrency from Scratch](https://www.udemy.com/course/build-blockchain/). The course provided the application usecases and the domain entities.
+
 ## Project Structure
 
 ```

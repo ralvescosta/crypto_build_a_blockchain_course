@@ -7,34 +7,25 @@ This project was build during the course [Build a Blockchain and Cryptocurrency 
 ```
 |
 │   └── src
-|       ├── applications
+|       ├── application
 │       │   └── errors
 │       │       └── *_error.ts
 │       │   └── interfaces
 │       │       └── i_*.ts
-│       │   └── usecase
+│       │   └── usecases
 │       │       └── _usecase.ts
 │       │
-│       ├── business
-│       │   └── dtos
-│       │       └── *_dto.ts
+│       ├── domain
 │       │   └── entities
 │       │       └── *.ts
 │       │   └── usecases
 │       │       └── i_*_usecase.ts
 │       │
-│       ├── infrastructure
+│       ├── infra
 │       │   └── adapters
 │       │       └── *_adapt.ts
 │       │   └── database
-│       │       └── migrations
-│       │           └── *.js
-│       │       └── models
-│       │           └── *_model.js
-│       │       └── seeders
-│       │           └── *_seeder.js
-│       │       └── connection.ts
-│       │       └── sequelize.js
+│       │       └── *.js
 │       │   └── environments
 │       │       └── *.ts
 │       │   └── http_server
@@ -56,22 +47,18 @@ This project was build during the course [Build a Blockchain and Cryptocurrency 
 |       ├── shared
 │       │   └── base_error.ts
 │       │   └── either.ts
-│       │   └── http_response_factory.ts
-│       │   └── i_controller_base.ts
-│       │   └── i_rotes.ts
-│       │   └── router_config.ts
 │       │
 |       ├── ioc.ts
 |       ├── main.ts
 |
 |
 │   └── tests
-|       ├── applications
-|       ├── business
-|       ├── infrastructure
+|       ├── application
+|       ├── domain
+|       ├── infra
 |       ├── interfaces
-|       ├── mocks
-|       ├── shared
+|       └── shared
+└───────
 ```
 
 ## Installation
@@ -79,7 +66,7 @@ This project was build during the course [Build a Blockchain and Cryptocurrency 
 - Pull
 
 ```bash
-git pull https://github.com/ralvescosta/node_base_project.git
+git pull https://github.com/ralvescosta/crypto_build_a_blockchain_course
 ```
 
 - Get Pkg's
@@ -100,4 +87,4 @@ docker-compose -f docker-compose.environments.yml up -d
 yarn start:dev
 ```
 
-- To run the application in debugger mode press F5
+- To run the application in debugger mode just press F5

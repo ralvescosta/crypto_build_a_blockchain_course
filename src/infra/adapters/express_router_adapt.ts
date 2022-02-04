@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 import { HttpRequest, HttpResponse } from '../http_server/http'
-import ILogger from '../../application/interfaces/i_logger'
+import { ILogger } from '../../application/interfaces/i_logger'
 
 export default (handler: (req: HttpRequest) => Promise<HttpResponse>, logger: ILogger) => {
   return async (req: Request, res: Response) => {

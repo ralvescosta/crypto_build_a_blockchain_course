@@ -23,7 +23,7 @@ class HttpServer {
   }
 
   public run (): void {
-    const port = process.env.PORT || 3333
+    const port = process.env.HTTP_PORT || 3333
     this._server.listen(port, () => {
       this.logger.info(`[HttpServer::Runner] server running on port ${port}`)
     })

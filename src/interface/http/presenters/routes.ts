@@ -10,9 +10,17 @@ class Routes implements IRouter {
   ) {}
 
   register (): void {
-    this.httpServer.registerRoute('get', '/api/v1/blocks', RouterAdapt(this.blockchainController.getBlocks.bind(this.blockchainController), this.logger))
-    this.httpServer.registerRoute('post', '/api/v1/add-block', () => {})
-    this.httpServer.registerRoute('post', '/api/v1/replace-chain', () => {})
+    this.httpServer.registerRoute(
+      'get',
+      '/api/v1/blocks',
+      RouterAdapt(this.blockchainController.getBlocks.bind(this.blockchainController), this.logger)
+    )
+
+    this.httpServer.registerRoute(
+      'post',
+      '/api/v1/mine',
+      RouterAdapt(this.blockchainController.mine.bind(this.blockchainController), this.logger)
+    )
   }
 }
 

@@ -13,6 +13,8 @@ import { HttpErrorHandlerFactory } from './interface/http/factories/http_error_h
 import { Routes } from './interface/http/presenters/routes'
 
 import { GetBlocksUseCase } from './application/usecases/get_blocks_usecase'
+import { SyncBlockchainUseCase } from './application/usecases/sync_blockchain_usecase'
+import { MineUseCase } from './application/usecases/mine_usecase'
 import { BlockchainController } from './interface/http/controllers/blockchain_controller'
 
 export const container = createContainer({
@@ -30,6 +32,8 @@ export const registerInjections = (): AwilixContainer => {
     blockchainRepository: asClass(InMemoryBlockchainRepository).scoped(),
 
     getBlocksUseCase: asClass(GetBlocksUseCase),
+    syncBlockchainUseCase: asClass(SyncBlockchainUseCase),
+    mineUseCase: asClass(MineUseCase),
     blockchainController: asClass(BlockchainController).singleton(),
     Routes: asClass(Routes).singleton()
   })

@@ -6,9 +6,12 @@ import { routerConfig } from './interface/http/router_config'
   Environment.registerEnvironments()
   const container = registerInjections()
 
-  const { httpServer } = container.cradle
+  const { httpServer, p2pServer } = container.cradle
 
   httpServer.setup()
   routerConfig(container.cradle)
   httpServer.run()
+
+  p2pServer.start()
+  p2pServer.connToNetwork()
 })()

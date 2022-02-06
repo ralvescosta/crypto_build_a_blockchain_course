@@ -1,7 +1,7 @@
 import { ILogger } from '../../../application/interfaces/i_logger'
 import RouterAdapt from '../../../infra/adapters/express_router_adapt'
 import { BlockchainController } from '../controllers/blockchain_controller'
-import { IRouter } from '../i_router'
+import { IRouter } from './i_router'
 class Routes implements IRouter {
   constructor (
     private readonly logger: ILogger,

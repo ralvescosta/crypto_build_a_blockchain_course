@@ -6,9 +6,11 @@ import { IGetBlocksUseCase } from '../../domain/usecases/i_get_blocks_usecase'
 class P2PServer {
   private readonly PEARS_ADDRESS: string[]
   private readonly WS_PORT: number
+  private _wsServer!: Server
   private readonly _connectedNodes: WebSocket[] = []
   constructor (
     private readonly logger: ILogger,
+    private readonly p2pService: any,
     private readonly syncBlockchainUseCase: ISyncBlockchainUseCase,
     private readonly getBlocksUseCase: IGetBlocksUseCase
   ) {
@@ -17,9 +19,21 @@ class P2PServer {
   }
 
   public start (): void {
-    const server = new Server({ port: this.WS_PORT })
-    server.on('connection', connection => this._connectSocket(connection))
+    this._wsServer = new Server({ port: this.WS_PORT })
     this.logger.info(`[P2PServer::start] - Listening for peer-to-peer connections on: 127.0.0.1:${this.WS_PORT}`)
+    this._wsServer.on('connection', connection => this._connectSocket(connection))
+  }
+
+  public registerConnectionEvent (handler: (nodeId: string) => void): void {
+    this._wsServer.on('connection', connection => {
+      const nodeId = this.p2pService.registerNewNode(connection)
+      this.logger.info('[SP2PServer::_connectSocket] - socket connected')
+      handler(nodeId)
+    })
+  }
+
+  public registerEvent (event: string, handler: (connection: WebSocket) => void): void {
+    this._wsServer.on(event, handler)
   }
 
   public connToNetwork (): void {

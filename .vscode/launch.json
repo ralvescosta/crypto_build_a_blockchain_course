@@ -2,7 +2,7 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Launch",
+      "name": "Launch Main",
       "type": "node",
       "request": "launch",
       "runtimeExecutable": "node",
@@ -10,6 +10,20 @@
       "args": ["src/main.ts"],
       "env": {
         "NODE_ENV": "development"
+      },
+      "cwd": "${workspaceRoot}",
+      "internalConsoleOptions": "openOnSessionStart",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"]
+    },
+    {
+      "name": "Launch Node",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only", "-r", "tsconfig-paths/register"],
+      "args": ["src/main.ts"],
+      "env": {
+        "NODE_ENV": "n1.development"
       },
       "cwd": "${workspaceRoot}",
       "internalConsoleOptions": "openOnSessionStart",

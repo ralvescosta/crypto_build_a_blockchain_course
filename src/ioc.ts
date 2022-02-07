@@ -5,7 +5,6 @@ import pinoInspector from 'pino-inspector'
 
 import { HttpServer } from './infra/http_server/http_server'
 import { WsServer } from './infra/websocket/ws_server'
-import { P2PServer } from './infra/websocket/p2p_server'
 import { InMemoryDatabaseConn } from './infra/database/in_memory/conn'
 import { InMemoryBlockchainRepository } from './infra/repositories/in_memory_blockchain_repository'
 
@@ -31,7 +30,6 @@ export const registerInjections = (): AwilixContainer => {
     logger: asValue(createLoggerInstance()),
     httpServer: asClass(HttpServer).singleton(),
     wsServer: asClass(WsServer).singleton(),
-    p2pServer: asClass(P2PServer).singleton(),
     httpResponseFactory: asClass(HttpResponseFactory).singleton(),
     httpErrorHandlerFactory: asClass(HttpErrorHandlerFactory).singleton(),
 

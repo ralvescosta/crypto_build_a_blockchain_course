@@ -44,12 +44,12 @@ class P2PService implements IP2PService {
 
     const nodeConn = this._connectedNodes[nodeId]
 
-    if (nodeConn.readyState !== nodeConn.OPEN) {
+    if (nodeConn.readyState !== WebSocket.OPEN) {
       this.logger.error(`[P2PService::SendMessageToNode] - The Node: ${nodeConn.url} Connection is not established`)
       return left(new Error('Node Connection is not established'))
     }
 
-    this._connectedNodes[nodeId].send(message)
+    nodeConn.send(message)
 
     return right(true)
   }

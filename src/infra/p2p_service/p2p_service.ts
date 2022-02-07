@@ -30,6 +30,7 @@ class P2PService implements IP2PService {
     if (isValid.isLeft()) return isValid
 
     this._connectedNodes[nodeId].on('message', (receivedMessage) => {
+      console.log(receivedMessage)
       const message = JSON.parse(receivedMessage.toString())
       handler(message)
     })
@@ -41,6 +42,13 @@ class P2PService implements IP2PService {
     const isValid = this._validateIfNodeExiste(nodeId)
     if (isValid.isLeft()) return isValid
 
+    const nodeConn = this._connectedNodes[nodeId]
+
+    if (nodeConn.readyState !== nodeConn.OPEN) {
+      this.logger.error(`[P2PService::SendMessageToNode] - The Node: ${nodeConn.url} Connection is not established`)
+      return left(new Error('Node Connection is not established'))
+    }
+
     this._connectedNodes[nodeId].send(message)
 
     return right(true)
@@ -48,13 +56,13 @@ class P2PService implements IP2PService {
 
   public broadcastChain (chain: Block[]): void {
     for (const nodeId in this._connectedNodes) {
-      this._connectedNodes[nodeId].send(chain)
+      this._connectedNodes[nodeId].send(JSON.stringify(chain))
     }
   }
 
   private _validateIfNodeExiste (nodeId: string): Either<BaseError, boolean> {
     if (!this._connectedNodes[nodeId]) {
-      this.logger.error('[P2PService::registerNodeMessageHandler] - NotFound NodeId')
+      this.logger.error('[P2PService::RegisterNodeMessageHandler] - NotFound NodeId')
       return left(new Error('NotFound the Node'))
     }
 

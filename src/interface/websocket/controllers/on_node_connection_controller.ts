@@ -5,8 +5,8 @@ class OnNodeConnectionController {
     private readonly onNodeConnectionUseCase: IOnNodeConnectionUseCase
   ) {}
 
-  public connection (nodeId: string): void {
-    this.onNodeConnectionUseCase.perform(nodeId)
+  public async connection (nodeId: string): Promise<void> {
+    await this.onNodeConnectionUseCase.perform(nodeId)
   }
 }
 

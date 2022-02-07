@@ -4,14 +4,14 @@ import { ILogger } from '../../application/interfaces/i_logger'
 
 class WsServer {
   private readonly WS_PORT: number
-  private readonly NODES_ADDRESS: string[]
+  private readonly PEERS_ADDRESS: string[]
   private _wsServer!: Server
   constructor (
     private readonly logger: ILogger,
     private readonly p2pService: IP2PService
   ) {
     this.WS_PORT = Number(process.env.WS_PORT || 5001)
-    this.NODES_ADDRESS = process.env.WS_NODES_ADDRESS ? process.env.WS_NODES_ADDRESS.split(',') : []
+    this.PEERS_ADDRESS = process.env.WS_PEERS_ADDRESS ? process.env.WS_PEERS_ADDRESS.split(',') : []
   }
 
   public start (): void {
@@ -24,7 +24,7 @@ class WsServer {
 
     this._wsServer.on('connection', connection => {
       const nodeId = this.p2pService.registerNewNode(connection)
-      this.logger.info('[WsServer::_connectSocket] - socket connected')
+      this.logger.info('[WsServer::ConnectSocket] - socket connected')
       handler(nodeId)
     })
   }
@@ -35,7 +35,11 @@ class WsServer {
   }
 
   public connectToNetwork (onNodeConnectionController: any): void {
-    this.NODES_ADDRESS.forEach(nodeAddress => {
+    if (!this.PEERS_ADDRESS.length) {
+      this.logger.info('[WsServer::ConnectToNetwork] - Any Node Connected')
+      return
+    }
+    this.PEERS_ADDRESS.forEach(nodeAddress => {
       const nodeConn = new WsClient(nodeAddress)
       const nodeId = this.p2pService.registerNewNode(nodeConn)
       onNodeConnectionController.connection(nodeId)

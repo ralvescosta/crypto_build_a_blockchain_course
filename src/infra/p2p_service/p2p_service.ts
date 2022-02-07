@@ -14,7 +14,8 @@ class P2PService implements IP2PService {
   private readonly _connectedNodes: INode = {}
   constructor (
     private readonly logger: ILogger
-  ) {}
+  ) {
+  }
 
   public registerNewNode (nodeConn: WebSocket): string {
     const id = crypto.randomBytes(34).toString('base64')

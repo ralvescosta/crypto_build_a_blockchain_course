@@ -24,4 +24,9 @@ describe('Domain :: Entities :: Block', () => {
   it('should hash correctly using blockHash()', () => {
     expect(secondBlock.hash).toEqual(Block.blockHash(secondBlock))
   })
+
+  it('should generates a hash that matches the difficulty', () => {
+    const difficulty = Number(process.env.DIFFICULTY)
+    expect(genesisBlock.hash.slice(0, difficulty)).toEqual('0'.repeat(difficulty))
+  })
 })

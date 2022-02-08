@@ -26,7 +26,14 @@ describe('Domain :: Entities :: Block', () => {
   })
 
   it('should generates a hash that matches the difficulty', () => {
-    const difficulty = Number(process.env.DIFFICULTY)
-    expect(genesisBlock.hash.slice(0, difficulty)).toEqual('0'.repeat(difficulty))
+    expect(genesisBlock.hash.slice(0, genesisBlock.difficulty)).toEqual('0'.repeat(genesisBlock.difficulty))
+  })
+
+  it('should lowers difficulty for slowly mined blocks', () => {
+    expect(Block.adjustDifficulty(genesisBlock, genesisBlock.timestamp + 360000)).toEqual(genesisBlock.difficulty - 1)
+  })
+
+  it('should raise the difficulty for quickly mined blocks', () => {
+    expect(Block.adjustDifficulty(genesisBlock, genesisBlock.timestamp + 1)).toEqual(genesisBlock.difficulty + 1)
   })
 })

@@ -1,4 +1,6 @@
 import { Guid } from '../../shared/guid'
+import { BaseError } from '../../shared/base_error'
+import { Either, left, right } from '../../shared/either'
 import { Wallet } from './wallet'
 
 type TxOutput = {
@@ -12,19 +14,19 @@ class Transaction {
     public readonly output: TxOutput[] = []
   ) {}
 
-  static new (senderWaller: Wallet, recipient: string, amount: number): Transaction | undefined {
+  static new (senderWaller: Wallet, recipient: string, amount: number): Either<BaseError, Transaction> {
     if (amount > senderWaller.balance) {
       console.log(`[Transaction::New] - Amount ${amount} exceeds balance.`)
-      return undefined
+      return left(new Error(''))
     }
 
     const outputs: TxOutput[] = [
-      { amount: senderWaller.balance - amount, address: senderWaller.keyPair.publicKey },
+      { amount: senderWaller.balance - amount, address: senderWaller.publicKey },
       { amount, address: recipient }
     ]
 
-    return new this(Guid.new(), null, outputs)
+    return right(new this(Guid.new(), null, outputs))
   }
 }
 
-export { Transaction }
+export { Transaction, TxOutput }

@@ -7,9 +7,9 @@ type TxOutput = {
 }
 class Transaction {
   private constructor (
-    private readonly id: string = Guid.new(),
-    private readonly input: any = null,
-    private readonly output: TxOutput[] = []
+    public readonly id: string = Guid.new(),
+    public readonly input: any = null,
+    public readonly output: TxOutput[] = []
   ) {}
 
   static new (senderWaller: Wallet, recipient: string, amount: number): Transaction | undefined {
